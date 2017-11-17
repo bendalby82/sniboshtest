@@ -6,13 +6,13 @@ timestamp(){
 
 LOGFILE=$PWD/test-routers-log.txt
 LB_TEST_APP=https://statictestapp.max.pepsi.cf-app.com/
-GOROUTER_IPS=(http://10.0.32.15:8080/health http://10.0.0.14:8080/health http://10.0.0.15:8080/health)
+GOROUTER_IPS=(http://10.0.0.13:8080/health http://10.0.0.14:8080/health http://10.0.0.15:8080/health)
 CURL_COMMAND="curl --silent --output /dev/null --write-out '%{http_code}\n' --max-time 1 "
 HTTPS_CURL="$CURL_COMMAND --insecure "
-POLLING_INTERVAL_IN_SECONDS=10
+POLLING_INTERVAL_IN_SECONDS=5
 
-#Sample for an hour (6 samples a minute, 60 minutes)
-for ((i=1;i<=2;i++));
+#Sample for an hour (12 samples a minute, 60 minutes)
+for ((i=1;i<=720;i++));
 do
 	REPORT_LINE=$(timestamp)
 	CURL_OUTPUT=`$HTTPS_CURL $LB_TEST_APP`
@@ -32,5 +32,6 @@ do
 			REPORT_LINE="${REPORT_LINE} DOWN"
 		fi
 	done
-	echo "$REPORT_LINE"
+	echo "$REPORT_LINE" >> $LOGFILE
+        sleep $POLLING_INTERVAL_IN_SECONDS
 done
