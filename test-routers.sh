@@ -1,4 +1,8 @@
 #!/bin/bash
+# Run with:
+# nohup ./test-routers.sh &
+# Kill with:
+# kill %1 #where 1 is job number
 
 timestamp(){
   date +"%Y-%m-%d %T"
