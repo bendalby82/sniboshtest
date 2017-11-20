@@ -15,17 +15,9 @@ CURL_COMMAND="curl --silent --output /dev/null --write-out '%{http_code}\n' --ma
 HTTPS_CURL="$CURL_COMMAND --insecure "
 POLLING_INTERVAL_IN_SECONDS=5
 
-#Sample for an hour (12 samples a minute, 60 minutes)
 for ((i=1;i<=720;i++));
 do
 	REPORT_LINE=$(timestamp)
-	CURL_OUTPUT=`$HTTPS_CURL $LB_TEST_APP`
-
-	if [ $? -eq 0 ]; then 
-		REPORT_LINE="${REPORT_LINE} OK  "
-	else
-		REPORT_LINE="${REPORT_LINE} DOWN"
-	fi
 
 	for GOROUTER in ${!GOROUTER_IPS[*]}
 	do
@@ -37,5 +29,5 @@ do
 		fi
 	done
 	echo "$REPORT_LINE" >> $LOGFILE
-        sleep $POLLING_INTERVAL_IN_SECONDS
+    sleep $POLLING_INTERVAL_IN_SECONDS
 done
