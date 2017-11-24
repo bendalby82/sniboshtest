@@ -1,5 +1,5 @@
 # SNI BOSH Test
-A set of test scripts for testing Gorouter upgrade performance when upgrades are occurring. Can be used generally, but were originally intended for testing the Multiple Certificate feature:  
+A set of test scripts for testing Gorouter upgrade performance when upgrades are occurring. Can be used generally, but were originally intended for testing Cloud Foundry's Multiple Certificate feature:  
 https://docs.cloudfoundry.org/adminguide/securing-traffic.html#multcerts
 
 ## Usage
